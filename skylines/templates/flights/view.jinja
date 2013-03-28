@@ -3,7 +3,7 @@
 
 
 {% from 'flights/meta-tags.jinja' import flight_meta_tags with context %}
-{% from 'flights/details-table.jinja' import render_details_table, details_table_script with context %}
+{% from 'flights/details-table.jinja' import render_details_table, details_table_script, details_table_styles with context %}
 {% from 'flights/phases-table.jinja' import render_circling_performance, render_cruise_performance, render_phases with context %}
 {% from 'flights/macros.jinja' import flight_title with context %}
 {% from 'macros/datetime.jinja' import timeago_script with context %}
@@ -31,6 +31,8 @@
   <link href="/css/eye_candy/OpenLayers.css" rel="stylesheet" type="text/css" />
   {%- endif %}
 {%- endif %}
+
+{{ details_table_styles() }}
 {%- endblock %}
 
 
