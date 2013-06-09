@@ -406,3 +406,7 @@ small .badge-empty {
 .table-tracking th:nth-child(5) {
     width: 11.111%;
 }
+
+.gold {
+  color: gold;
+}
