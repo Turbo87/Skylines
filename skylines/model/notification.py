@@ -23,6 +23,7 @@ class Event(db.Model):
         FLIGHT_COMMENT = 1
         FLIGHT = 2
         FOLLOWER = 3
+        ACHIEVEMENT = 4
 
     # Event time
 
@@ -51,6 +52,12 @@ class Event(db.Model):
     flight_comment_id = db.Column(
         Integer, db.ForeignKey('flight_comments.id', ondelete='CASCADE'))
     flight_comment = db.relationship('FlightComment')
+
+    # An unlocked achievement, if this event is about an achievement
+
+    achievement_id = db.Column(
+        Integer, db.ForeignKey('achievements.id', ondelete='CASCADE'))
+    achievement = db.relationship('UnlockedAchievement')
 
     ##############################
 
@@ -182,3 +189,15 @@ def create_follower_notification(followed, follower):
     # Create the notification
     item = Notification(event=event, recipient=followed)
     db.session.add(item)
+
+
+def create_achievement_notification(achievement):
+    event = Event(type=Event.Type.ACHIEVEMENT,
+                  achievement=achievement,
+                  actor=achievement.pilot,
+                  flight=achievement.flight)
+    db.session.add(event)
+
+    # Notify pilot about his achievement
+    notif = Notification(event=event, recipient=event.actor)
+    db.session.add(notif)
