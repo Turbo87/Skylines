@@ -53,6 +53,8 @@
   <i class="icon-plane"></i>
 {%- elif event.type == types.FOLLOWER %}
   <i class="icon-user"></i>
+{%- elif notification.type == types.ACHIEVEMENT %}
+  <i class="icon-check"></i>
 {%- endif %}&nbsp;
 {%- endmacro %}
 
