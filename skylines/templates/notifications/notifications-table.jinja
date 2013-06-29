@@ -71,6 +71,8 @@
     {{ render_flight_event_text(event) }}
   {%- elif event.type == types.FOLLOWER %}
     {{ render_follower_event_text(event) }}
+  {%- elif event.type == types.ACHIEVEMENT %}
+    {{ render_achievment_event_text(event) }}
   {%- else %}
     Error: Unknown event
   {%- endif %}
@@ -115,6 +117,12 @@
 {%- endif %}
 {%- endmacro %}
 
+{% macro render_achievement_event_text(event) -%}
+{% trans achievement=event.achievement.title|e -%}
+Achievement unlocked! {{ achievement }}
+{%- endtrans %}
+{%- endmacro %}
+
 
 {% macro _render_show_button(link) -%}
 <a href="{{ link }}" class="btn btn-mini">{{ _('Show') }}</a>
@@ -127,9 +135,9 @@
     {{ url_for('flights.pilot', id=event.actor_id) }}
   {%- endif %}
 {%- else %}
-  {% if event.type == types.FLIGHT_COMMENT -%}
-    {{ url_for('flight.index', flight_id=event.flight_id) }}
-  {%- elif event.type == types.FLIGHT %}
+  {% if event.type == types.FLIGHT_COMMENT or
+        event.type == types.FLIGHT or
+        event.type == types.ACHIEVEMENT %}
     {{ url_for('flight.index', flight_id=event.flight_id) }}
   {%- elif event.type == types.FOLLOWER %}
     {{ url_for('user.index', user_id=event.user_id) }}
