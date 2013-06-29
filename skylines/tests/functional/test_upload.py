@@ -75,4 +75,3 @@ class TestUpload(TestController):
                                                     '/tmp/100km.igc')
         b.getControl('Upload').click()
         assert_in('Your flights have been saved.', b.contents)
-        assert_in('Achievements unlocked', b.contents)
