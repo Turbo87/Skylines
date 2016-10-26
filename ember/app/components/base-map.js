@@ -67,6 +67,7 @@ export default Ember.Component.extend({
     this.addBingLayers();
     this.addMapboxLayer();
     this.addEmptyLayer();
+    this.addStamenLayer();
 
     let query = parseQueryString(window.location.search);
     this.set('baseLayer', query.baselayer);
@@ -278,6 +279,24 @@ export default Ember.Component.extend({
     });
 
     this.get('map').addLayer(empty_layer);
+  },
+
+
+  addStamenLayer() {
+    let stamen_layer = new ol.layer.Tile()({
+      source: new ol.source.Stamen({
+        layer: 'terrain',
+      }),
+    });
+
+    stamen_layer.setProperties({
+      'name': 'Stamen Terrain',
+      'id': 'StamenTerrain',
+      'base_layer': true,
+      'display_in_layer_switcher': true,
+    });
+
+    this.get('map').addLayer(stamen_layer);
   },
 
 });
