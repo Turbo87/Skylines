@@ -85,6 +85,7 @@
     "ol.render.canvas.Immediate#setImageStyle",
     "ol.source.BingMaps",
     "ol.source.OSM",
+    "ol.source.Stamen",
     "ol.source.Vector",
     "ol.source.Vector#on",
     "ol.source.Vector#addFeature",
