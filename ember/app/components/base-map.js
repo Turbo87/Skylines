@@ -283,7 +283,7 @@ export default Ember.Component.extend({
 
 
   addStamenLayer() {
-    let stamen_layer = new ol.layer.Tile()({
+    let stamen_layer = new ol.layer.Tile({
       source: new ol.source.Stamen({
         layer: 'terrain',
       }),
